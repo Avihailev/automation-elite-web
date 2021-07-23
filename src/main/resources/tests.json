@@ -1,0 +1,55 @@
+{
+  "suiteId": 1,
+  "suitePlatform" : "web",
+  "suiteName" : "web tests",
+  "tests" :
+  [
+    {
+      "testId" : 1,
+      "testName" : "testNumberOne",
+      "testBrowser" : "chrome",
+      "steps" : [
+        {
+          "stepId" : 1,
+          "stepName" : "clickLoginButton",
+          "findKeywordBy" : "id",
+          "keywordValue" : "mobile-login-modal",
+          "keywordAction" : "click",
+          "actionValue" : ""
+        },
+        {
+          "stepId" : 2,
+          "stepName" : "clickRegularLogin",
+          "findKeywordBy" : "id",
+          "keywordValue" : "regular-login",
+          "keywordAction" : "click",
+          "actionValue" : ""
+        },
+        {
+          "stepId" : 3,
+          "stepName" : "setIdNum",
+          "findKeywordBy" : "xpath",
+          "keywordValue" : "//input[@formcontrolname='id']",
+          "keywordAction" : "set",
+          "actionValue" : "123456789"
+        },
+        {
+          "stepId" : 4,
+          "stepName" : "setLastFourDigits",
+          "findKeywordBy" : "xpath",
+          "keywordValue" : "//input[@formcontrolname='id']",
+          "keywordAction" : "set",
+          "actionValue" : "1234"
+        },
+        {
+          "stepId" : 5,
+          "stepName" : "clickSubmit",
+          "findKeywordBy" : "xpath",
+          "keywordValue" : "//span[contains(text(),'SMS')]/parent::button",
+          "keywordAction" : "click",
+          "actionValue" : ""
+        }
+      ]
+    }
+  ]
+}
