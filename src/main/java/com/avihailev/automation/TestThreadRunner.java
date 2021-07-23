@@ -13,6 +13,12 @@ public class TestThreadRunner implements Runnable {
     @Override
     public void run() {
         Driver driver = new Driver(test.getTestBrowser());
+        driver.enterUrl(test.getUrl());
+        for (TestStep step : test.getSteps()){
+            Element element = new Element(driver,step);
+            element.find();
+            //Actions actions = new Actions(element,);
+        }
         //System.out.println("thread " + Thread.currentThread().getName());
         driver.kill();
     }

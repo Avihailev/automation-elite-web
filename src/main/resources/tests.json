@@ -8,6 +8,7 @@
       "testId" : 1,
       "testName" : "testNumberOne",
       "testBrowser" : "chrome",
+      "url" : "https://www.cal-store.co.il/",
       "steps" : [
         {
           "stepId" : 1,

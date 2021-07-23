@@ -46,6 +46,7 @@ public class Driver {
                     break;
                 }
             }
+            driver.manage().window().maximize();
         } catch (Exception exception){
             logger.fatal("creating driver failed");
         }
@@ -85,5 +86,9 @@ public class Driver {
         } catch (IOException ioException){
             logger.error("couldnt kill " + serviceName + " driver task, please close it manually");
         }
+    }
+
+    public void enterUrl(String url){
+        driver.get(url);
     }
 }

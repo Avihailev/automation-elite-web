@@ -14,6 +14,7 @@ public class Test {
     private int testId;
     private String testName;
     private String testBrowser;
+    private String url;
     private List<TestStep> steps;
 
 }
