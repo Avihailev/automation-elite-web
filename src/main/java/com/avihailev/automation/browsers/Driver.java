@@ -80,13 +80,6 @@ public class Driver {
         return driver;
     }
 
-    public void kill() {
-        try {
-            Process p = Runtime.getRuntime().exec("taskkill /IM " + serviceName + " /F");
-        } catch (IOException ioException){
-            logger.error("couldnt kill " + serviceName + " driver task, please close it manually");
-        }
-    }
 
     public void enterUrl(String url){
         driver.get(url);

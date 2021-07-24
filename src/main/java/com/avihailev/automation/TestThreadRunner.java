@@ -5,9 +5,11 @@ import com.avihailev.automation.browsers.Driver;
 public class TestThreadRunner implements Runnable {
 
     private Test test;
+    private Settings settings;
 
-    public TestThreadRunner(Test test){
+    public TestThreadRunner(Test test, Settings settings){
         this.test = test;
+        this.settings = settings;
     }
 
     @Override
@@ -15,11 +17,12 @@ public class TestThreadRunner implements Runnable {
         Driver driver = new Driver(test.getTestBrowser());
         driver.enterUrl(test.getUrl());
         for (TestStep step : test.getSteps()){
+            step.setSettings(settings);
             Element element = new Element(driver,step);
-            element.find();
-            //Actions actions = new Actions(element,);
+            if (element.find()){
+                Actions actions = new Actions(element,step);
+            }
         }
         //System.out.println("thread " + Thread.currentThread().getName());
-        driver.kill();
     }
 }

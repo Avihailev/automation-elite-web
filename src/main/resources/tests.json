@@ -52,5 +52,9 @@
         }
       ]
     }
-  ]
+  ],
+  "settings" : {
+    "reportLocation" : "C:\\Automation\\report\\",
+    "highlightElement" : true
+  }
 }

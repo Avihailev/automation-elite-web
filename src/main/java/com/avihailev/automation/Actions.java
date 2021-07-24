@@ -10,7 +10,7 @@ public class Actions {
 
     private static final Logger logger = LogManager.getLogger(Actions.class.getName());
 
-    public Actions(Element element, ActionType action){
+    public Actions(Element element, TestStep step){
         logger.info("deciding what action to take");
         this.element = element;
     }

@@ -1,5 +1,6 @@
 package com.avihailev.automation;
 
+import com.avihailev.automation.types.ActionType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,7 +14,8 @@ public class TestStep {
     private String stepName;
     private String findKeywordBy;
     private String keywordValue;
-    private String keywordAction;
+    private ActionType keywordAction;
     private String actionValue;
+    private Settings settings;
 
 }

@@ -15,6 +15,7 @@ public class TestSuite {
     private String suitePlatform;
     private String suiteName;
     private List<Test> tests;
+    private Settings settings;
 
 
 }
