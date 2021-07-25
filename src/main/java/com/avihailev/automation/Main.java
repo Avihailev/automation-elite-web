@@ -17,8 +17,10 @@ public class Main {
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             InputStream testStream = Main.class.getClassLoader().getResourceAsStream("tests.json");
             TestSuite suite = objectMapper.readValue(testStream, TestSuite.class);
-            TestFactory testFactory = new TestFactory(suite);
-            testFactory.run();
+            if (Validator.validateSuite(suite)) {
+                TestFactory testFactory = new TestFactory(suite);
+                testFactory.run();
+            }
         } catch (Exception exception){
             logger.fatal("Failed in main operation of reading tests json file with this error");
             logger.fatal(exception.getMessage());

@@ -15,8 +15,10 @@ public class TestFactory {
     public void run(){
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(THREAD_POOL_MAX_SIZE);
         for (Test test : testSuite.getTests()){
-            TestThreadRunner testThreadRunner = new TestThreadRunner(test);
-            executor.execute(testThreadRunner);
+            if (Validator.validateTest(test)) {
+                TestThreadRunner testThreadRunner = new TestThreadRunner(test);
+                executor.execute(testThreadRunner);
+            }
         }
         executor.shutdown();
     }

@@ -83,7 +83,7 @@ public class Driver {
         try {
             Process p = Runtime.getRuntime().exec("taskkill /IM " + serviceName + " /F");
         } catch (IOException ioException){
-            logger.error("couldnt kill " + serviceName + " driver task, please close it manually");
+            logger.error("couldn't kill " + serviceName + " driver task, please close it manually");
         }
     }
 }

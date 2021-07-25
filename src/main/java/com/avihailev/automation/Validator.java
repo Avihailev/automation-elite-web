@@ -11,7 +11,7 @@ public class Validator {
 
     public static boolean validateTestStep(TestStep step){
         if (step.getStepName() == null){
-            logger.error("step don't have a name therefore step didnt run");
+            logger.error("step don't have a name therefore step didn't run");
             return false;
         }
         if (step.getStepId() == 0){
