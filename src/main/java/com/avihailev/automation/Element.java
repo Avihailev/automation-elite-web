@@ -69,4 +69,11 @@ public class Element {
         screenShot = CommonActions.printScreen(driver.getWebDriver(),step);
     }
 
+    public WebElement getElement() {
+        return element;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
 }

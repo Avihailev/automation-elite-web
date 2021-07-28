@@ -7,9 +7,8 @@ public class TestThreadRunner implements Runnable {
     private Test test;
     private Settings settings;
 
-    public TestThreadRunner(Test test, Settings settings){
+    public TestThreadRunner(Test test){
         this.test = test;
-        this.settings = settings;
     }
 
     @Override
