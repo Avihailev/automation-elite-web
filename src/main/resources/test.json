@@ -1,0 +1,29 @@
+{
+  "suiteId": 1,
+  "suitePlatform" : "web",
+  "suiteName" : "web tests",
+  "tests" :
+  [
+    {
+      "testId" : 1,
+      "testName" : "testNumberOne",
+      "testBrowser" : "chrome",
+      "url" : "https://elite-coffee.co.il/",
+      "steps" : [
+        {
+          "stepId" : 1,
+          "stepName" : "clickLoginButton",
+          "findKeywordBy" : "xpath",
+          "keywordValue" : "//a[contains(text(), 'שאלות ותשובות' )]",
+          "keywordAction" : "click",
+          "actionValue" : "",
+          "mandatory" : true
+        }
+      ]
+    }
+  ],
+  "settings" : {
+    "reportLocation" : "C:\\Automation\\report\\",
+    "highlightElement" : true
+  }
+}

@@ -8,9 +8,16 @@
     <artifactId>automation-elite-web</artifactId>
     <version>0.1</version>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <properties>
-        <maven.compiler.source>12</maven.compiler.source>
-        <maven.compiler.target>12</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -55,6 +62,12 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.11.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.Avihailev</groupId>
+            <artifactId>report-builder</artifactId>
+            <version>0.1</version>
         </dependency>
 
     </dependencies>

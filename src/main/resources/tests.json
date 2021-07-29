@@ -16,7 +16,8 @@
           "findKeywordBy" : "id",
           "keywordValue" : "mobile-login-modal",
           "keywordAction" : "click",
-          "actionValue" : ""
+          "actionValue" : "",
+          "mandatory" : true
         },
         {
           "stepId" : 2,
@@ -24,7 +25,8 @@
           "findKeywordBy" : "id",
           "keywordValue" : "regular-login",
           "keywordAction" : "click",
-          "actionValue" : ""
+          "actionValue" : "",
+          "mandatory" : true
         },
         {
           "stepId" : 3,
@@ -32,7 +34,8 @@
           "findKeywordBy" : "xpath",
           "keywordValue" : "//input[@formcontrolname='id']",
           "keywordAction" : "set",
-          "actionValue" : "123456789"
+          "actionValue" : "123456789",
+          "mandatory" : true
         },
         {
           "stepId" : 4,
@@ -40,7 +43,8 @@
           "findKeywordBy" : "xpath",
           "keywordValue" : "//input[@formcontrolname='id']",
           "keywordAction" : "set",
-          "actionValue" : "1234"
+          "actionValue" : "1234",
+          "mandatory" : true
         },
         {
           "stepId" : 5,
@@ -48,7 +52,8 @@
           "findKeywordBy" : "xpath",
           "keywordValue" : "//span[contains(text(),'SMS')]/parent::button",
           "keywordAction" : "click",
-          "actionValue" : ""
+          "actionValue" : "",
+          "mandatory" : false
         }
       ]
     }

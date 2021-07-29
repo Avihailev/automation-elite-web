@@ -7,8 +7,9 @@ public class TestThreadRunner implements Runnable {
     private Test test;
     private Settings settings;
 
-    public TestThreadRunner(Test test){
+    public TestThreadRunner(Test test, Settings settings){
         this.test = test;
+        this.settings = settings;
     }
 
     @Override
@@ -20,8 +21,15 @@ public class TestThreadRunner implements Runnable {
             Element element = new Element(driver,step);
             if (element.find()){
                 Actions actions = new Actions(element,step);
+                actions.action();
+            } else if (step.isMandatory()){
+                //todo: create report exit test.
+                break;
             }
         }
-        //System.out.println("thread " + Thread.currentThread().getName());
+    }
+
+    private void checkFailedTest(){
+
     }
 }

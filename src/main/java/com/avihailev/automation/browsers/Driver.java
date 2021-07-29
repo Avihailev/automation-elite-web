@@ -2,15 +2,20 @@ package com.avihailev.automation.browsers;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class Driver {
 
@@ -47,6 +52,8 @@ public class Driver {
                 }
             }
             driver.manage().window().maximize();
+            //driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+
         } catch (Exception exception){
             logger.fatal("creating driver failed");
         }
@@ -82,6 +89,11 @@ public class Driver {
 
 
     public void enterUrl(String url){
-        driver.get(url);
+        try {
+            driver.get(url);
+            Thread.sleep(8000);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 }

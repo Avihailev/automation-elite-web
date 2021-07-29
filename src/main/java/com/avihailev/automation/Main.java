@@ -15,7 +15,7 @@ public class Main {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            InputStream testStream = Main.class.getClassLoader().getResourceAsStream("tests.json");
+            InputStream testStream = Main.class.getClassLoader().getResourceAsStream("test.json");
             TestSuite suite = objectMapper.readValue(testStream, TestSuite.class);
             if (Validator.validateSuite(suite)) {
                 TestFactory testFactory = new TestFactory(suite);

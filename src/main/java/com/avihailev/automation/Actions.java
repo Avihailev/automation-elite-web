@@ -4,6 +4,7 @@ import com.avihailev.automation.common.CommonActions;
 import com.avihailev.automation.types.ActionType;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Locale;
@@ -25,10 +26,12 @@ public class Actions {
 
     public boolean action(){
         logger.info("taking action");
+        this.wait = new WebDriverWait(element.getDriver().getWebDriver(), 30);
         try {
             switch (step.getKeywordAction()) {
                 case Click: {
                     logger.info("clicking element");
+                    wait.until(ExpectedConditions.elementToBeClickable(element.getElement()));
                     element.getElement().click();
                     return true;
                 }
@@ -54,8 +57,14 @@ public class Actions {
             }
         } catch (Exception exception){
             logger.info("failed to " + step.getKeywordAction().toString().toLowerCase() + " element");
-            screenShot = CommonActions.printScreen(element.getDriver().getWebDriver(), step);
             return false;
+        } finally {
+            screenShot = CommonActions.printScreen(element.getDriver().getWebDriver(), step);
         }
     }
+
+    private void reportStep(){
+
+    }
+
 }

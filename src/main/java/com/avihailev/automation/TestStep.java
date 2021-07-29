@@ -16,6 +16,7 @@ public class TestStep {
     private String keywordValue;
     private ActionType keywordAction;
     private String actionValue;
+    private boolean mandatory;
     private Settings settings;
 
 }
