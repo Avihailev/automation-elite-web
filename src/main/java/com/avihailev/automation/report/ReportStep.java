@@ -7,6 +7,7 @@ public class ReportStep {
     private int stepNumber;
     private Status status;
     private String body;
+    private String screenShot;
 
     public ReportStep(int stepNumber, Status status, String body){
         this.stepNumber = stepNumber;

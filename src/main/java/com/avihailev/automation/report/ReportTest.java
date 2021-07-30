@@ -9,8 +9,10 @@ import java.util.List;
 public class ReportTest {
 
     private List<ReportStep> reportSteps;
+    private String testName;
 
-    public ReportTest(){
+    public ReportTest(String testName){
+        this.testName = testName;
         this.reportSteps = new ArrayList<>();
 
     }

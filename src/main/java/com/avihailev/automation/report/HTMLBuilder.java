@@ -4,6 +4,7 @@ import com.aventstack.extentreports.markuputils.CodeLanguage;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HTMLBuilder {
@@ -66,5 +67,13 @@ public class HTMLBuilder {
     public static String codeDesigner(String code){
         Markup markup = MarkupHelper.createCodeBlock(code);
         return markup.getMarkup();
+    }
+
+    public ArrayList<String> createListOfHeaders(String[] headers){
+        ArrayList<String> headersArrayList = new ArrayList<>();
+        for (int i = 0;i < headers.length; i++){
+            headersArrayList.add(headers[i]);
+        }
+        return headersArrayList;
     }
 }

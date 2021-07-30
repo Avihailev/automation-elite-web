@@ -2,6 +2,7 @@ package com.avihailev.automation;
 
 import com.avihailev.automation.browsers.Driver;
 import com.avihailev.automation.common.CommonActions;
+import com.avihailev.automation.report.HTMLBuilder;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -11,6 +12,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Element {
 
     private By by;
@@ -19,6 +23,7 @@ public class Element {
     private TestStep step;
     private WebElement element = null;
     private String screenShot;
+    private String log;
     private static final Logger logger = LogManager.getLogger(Element.class.getName());
 
     public Element(Driver driver, TestStep step){
@@ -79,5 +84,13 @@ public class Element {
 
     public Driver getDriver() {
         return driver;
+    }
+
+    public String getLog(){
+        HTMLBuilder htmlBuilder = new HTMLBuilder();
+        List<String> testReportList = htmlBuilder.createListOfHeaders(new String[] {});
+        if (element == null){
+
+        }
     }
 }

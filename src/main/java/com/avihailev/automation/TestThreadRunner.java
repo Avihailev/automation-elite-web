@@ -1,6 +1,10 @@
 package com.avihailev.automation;
 
+import com.aventstack.extentreports.Status;
 import com.avihailev.automation.browsers.Driver;
+import com.avihailev.automation.report.Report;
+import com.avihailev.automation.report.ReportStep;
+import com.avihailev.automation.report.ReportTest;
 
 public class TestThreadRunner implements Runnable {
 
@@ -14,6 +18,9 @@ public class TestThreadRunner implements Runnable {
 
     @Override
     public void run() {
+        //ReportTest reportTest = new ReportTest(test.getTestName());
+        Report report = new Report(settings.getReportLocation(), test.getTestName() + " - Automation Report");
+        report.startTest(test.getTestName());
         Driver driver = new Driver(test.getTestBrowser());
         driver.enterUrl(test.getUrl());
         for (TestStep step : test.getSteps()){
@@ -23,13 +30,11 @@ public class TestThreadRunner implements Runnable {
                 Actions actions = new Actions(element,step);
                 actions.action();
             } else if (step.isMandatory()){
-                //todo: create report exit test.
+                report.
                 break;
             }
         }
+        report.endReport();
     }
 
-    private void checkFailedTest(){
-
-    }
 }
