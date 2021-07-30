@@ -60,6 +60,7 @@
   ],
   "settings" : {
     "reportLocation" : "C:\\Automation\\report\\",
-    "highlightElement" : true
+    "highlightElement" : true,
+    "waitBetween": 3
   }
 }

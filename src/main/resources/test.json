@@ -12,11 +12,74 @@
       "steps" : [
         {
           "stepId" : 1,
-          "stepName" : "clickLoginButton",
+          "stepName" : "clickQA",
           "findKeywordBy" : "xpath",
           "keywordValue" : "//a[contains(text(), 'שאלות ותשובות' )]",
           "keywordAction" : "click",
           "actionValue" : "",
+          "mandatory" : true
+        },
+        {
+          "stepId" : 2,
+          "stepName" : "isCoffeeCapsule",
+          "findKeywordBy" : "xpath",
+          "keywordValue" : "//span[contains(text(),'קפסולות הקפה')]",
+          "keywordAction" : "compare",
+          "actionValue" : "קפסולות הקפה",
+          "mandatory" : true
+        },
+        {
+          "stepId" : 3,
+          "stepName" : "AffordablePackages",
+          "findKeywordBy" : "xpath",
+          "keywordValue" : "//span[contains(text(),'חבילות משתלמות')]",
+          "keywordAction" : "click",
+          "actionValue" : "",
+          "mandatory" : true
+        },
+        {
+          "stepId" : 4,
+          "stepName" : "order6bundle",
+          "findKeywordBy" : "xpath",
+          "keywordValue" : "//a[@href='https://elite-coffee.co.il/packages/beans-bundle-6']",
+          "keywordAction" : "click",
+          "actionValue" : "",
+          "mandatory" : true
+        },
+        {
+          "stepId" : 5,
+          "stepName" : "moveToCart",
+          "findKeywordBy" : "xpath",
+          "keywordValue" : "//span[contains(text(),'לעגלת הקניות')]",
+          "keywordAction" : "click",
+          "actionValue" : "",
+          "mandatory" : true
+        },
+        {
+          "stepId" : 6,
+          "stepName" : "moveToPayment",
+          "findKeywordBy" : "xpath",
+          "keywordValue" : "//span[contains(text(),'המשך לתשלום')]",
+          "keywordAction" : "click",
+          "actionValue" : "",
+          "mandatory" : true
+        },
+        {
+          "stepId" : 7,
+          "stepName" : "enterFirstName",
+          "findKeywordBy" : "xpath",
+          "keywordValue" : "//input[@name='firstname']",
+          "keywordAction" : "set",
+          "actionValue" : "אביחי",
+          "mandatory" : true
+        },
+        {
+          "stepId" : 8,
+          "stepName" : "enterLastName",
+          "findKeywordBy" : "xpath",
+          "keywordValue" : "//input[@name='lastname']",
+          "keywordAction" : "set",
+          "actionValue" : "לוי",
           "mandatory" : true
         }
       ]
@@ -24,6 +87,7 @@
   ],
   "settings" : {
     "reportLocation" : "C:\\Automation\\report\\",
-    "highlightElement" : true
+    "highlightElement" : true,
+    "waitBetween": 3
   }
 }

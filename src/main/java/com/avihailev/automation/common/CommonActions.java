@@ -1,7 +1,5 @@
 package com.avihailev.automation.common;
 
-import com.avihailev.automation.Element;
-import com.avihailev.automation.Settings;
 import com.avihailev.automation.TestStep;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.LogManager;
@@ -34,6 +32,16 @@ public class CommonActions {
                 logger.error("failed to save screenshot file");
             }
         }
+        return null;
+    }
+
+    public static String printScreenBASE64(WebDriver driver){
+        logger.info("taking screenshot base 64");
+            try {
+                return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+            } catch (WebDriverException webDriverException) {
+                logger.error("failed to take screenshot");
+            }
         return null;
     }
 

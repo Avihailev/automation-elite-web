@@ -1,10 +1,7 @@
 package com.avihailev.automation;
 
-import com.aventstack.extentreports.Status;
 import com.avihailev.automation.browsers.Driver;
 import com.avihailev.automation.report.Report;
-import com.avihailev.automation.report.ReportStep;
-import com.avihailev.automation.report.ReportTest;
 
 public class TestThreadRunner implements Runnable {
 
@@ -28,9 +25,14 @@ public class TestThreadRunner implements Runnable {
             Element element = new Element(driver,step);
             if (element.find()){
                 Actions actions = new Actions(element,step);
-                actions.action();
+                if (actions.action()) {
+                    report.report(actions);
+                } else {
+                    report.report(actions);
+                    break;
+                }
             } else if (step.isMandatory()){
-                report.
+                report.report(element);
                 break;
             }
         }

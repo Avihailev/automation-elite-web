@@ -5,6 +5,7 @@ import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HTMLBuilder {
@@ -16,8 +17,8 @@ public class HTMLBuilder {
 
     }
 
-    public void buildHTMLTable(String title, int columnCount, List<String> headersList, List<List<String>> data){
-        this.columnCount = columnCount;
+    public void buildHTMLTable(String title, List<String> headersList, List<List<String>> data){
+        this.columnCount = headersList.size();
         table = new StringBuilder();
         if (title != null){
             if (!title.isEmpty()){
@@ -26,9 +27,9 @@ public class HTMLBuilder {
         }
         table.append("<thead>");
         table.append("<tr>\n");
-        for (int i = 0; i < columnCount; i++){
+        for (String s : headersList) {
             table.append("<th style=\"max-width:150px; width:150\">");
-            table.append(headersList.get(i));
+            table.append(s);
             table.append("</th>\n");
         }
         table.append("</tr>\n");
@@ -71,9 +72,7 @@ public class HTMLBuilder {
 
     public ArrayList<String> createListOfHeaders(String[] headers){
         ArrayList<String> headersArrayList = new ArrayList<>();
-        for (int i = 0;i < headers.length; i++){
-            headersArrayList.add(headers[i]);
-        }
+        Collections.addAll(headersArrayList, headers);
         return headersArrayList;
     }
 }

@@ -11,4 +11,6 @@ public class Settings {
 
     private String reportLocation;
     private boolean highlightElement;
+    private int waitBetween;
+    //private int threadNumber;
 }

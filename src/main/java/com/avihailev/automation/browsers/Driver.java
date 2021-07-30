@@ -91,7 +91,7 @@ public class Driver {
     public void enterUrl(String url){
         try {
             driver.get(url);
-            Thread.sleep(8000);
+            Thread.sleep(3000);
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

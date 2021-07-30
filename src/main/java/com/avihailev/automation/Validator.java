@@ -1,6 +1,5 @@
 package com.avihailev.automation;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
