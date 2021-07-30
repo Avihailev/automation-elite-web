@@ -32,7 +32,8 @@ public class Actions extends Reporter {
                     try {
                         element.getElement().click();
                     } catch (Exception exception){
-                        System.out.println("exception: " + exception.getMessage());
+                        logger.error("exception: " + exception.getMessage());
+                        return fail("error in clicking " + step.getStepName());
                     }
                     return pass();
                 }
@@ -74,7 +75,7 @@ public class Actions extends Reporter {
 
     private boolean fail(String error){
         setPassed(false);
-        setReportMessage("keyword found an action " + step.getKeywordAction().toString() + " failed");
+        setReportMessage("keyword found an action " + step.getKeywordAction().toString() + " failed \n" + error);
         return false;
 
     }
