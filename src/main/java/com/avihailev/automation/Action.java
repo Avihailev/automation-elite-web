@@ -1,6 +1,7 @@
 package com.avihailev.automation;
 
 import com.avihailev.automation.report.Reporter;
+import com.avihailev.automation.types.ActionType;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.interactions.Actions;
@@ -31,7 +32,21 @@ public class Action extends Reporter {
                     wait.until(ExpectedConditions.elementToBeClickable(element.getElement()));
                     try {
                         moveToElement();
-                        element.getElement().click();
+                        boolean success = false;
+                        int i = 0;
+                        while (!success && i < 9) {
+                            try {
+                                element.getElement().click();
+                                success = true;
+                            } catch (Exception e){
+                                i++;
+                                logger.error(i + " try to click button " + step.getStepName());
+                                Thread.sleep(2000);
+                            }
+                        }
+                        if (!success) {
+                            element.getElement().click();
+                        }
                     } catch (Exception exception){
                         logger.error("exception: " + exception.getMessage());
                         return fail("error in clicking " + step.getStepName());
@@ -41,7 +56,10 @@ public class Action extends Reporter {
                 case Set: {
                     logger.info("setting text in field");
                     moveToElement();
-                    element.getElement().sendKeys(step.getActionValue());
+                    for (int i = 0; i < step.getActionValue().length(); i++) {
+                        element.getElement().sendKeys(String.valueOf(step.getActionValue().charAt(i)));
+                        Thread.sleep(500);
+                    }
                     return pass();
                 }
                 case CompareText: {
@@ -125,14 +143,16 @@ public class Action extends Reporter {
     }
 
     private void moveToElement(){
-        logger.info("moving to element");
-        try {
-            Actions actions = new Actions(element.getDriver().getWebDriver());
-            actions.moveToElement(element.getElement()).perform();
-        } catch (Exception e){
-            logger.error("failed to move to element with this error: ");
-            logger.error(e.getMessage());
+        if (step.getSettings().isMoveToElement() || step.getKeywordAction() == ActionType.MoveToElement) {
+            logger.info("moving to element");
+            try {
+                Actions actions = new Actions(element.getDriver().getWebDriver());
+                actions.moveToElement(element.getElement()).build().perform();
+                //Thread.sleep(1000);
+            } catch (Exception e) {
+                logger.error("failed to move to element with this error: ");
+                logger.error(e.getMessage());
+            }
         }
-
     }
 }

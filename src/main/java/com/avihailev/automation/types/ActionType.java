@@ -1,6 +1,7 @@
 package com.avihailev.automation.types;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javafx.scene.shape.MoveTo;
 
 public enum ActionType {
     @JsonProperty("click")
@@ -14,5 +15,7 @@ public enum ActionType {
     @JsonProperty("wait")
     Wait,
     @JsonProperty("context click")
-    ContextClick
+    ContextClick,
+    @JsonProperty("move to element")
+    MoveToElement
 }

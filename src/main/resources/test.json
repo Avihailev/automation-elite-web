@@ -41,7 +41,7 @@
           "stepId" : 4,
           "stepName" : "order6bundle",
           "findKeywordBy" : "xpath",
-          "keywordValue" : "//a[@href='https://elite-coffee.co.il/packages/beans-bundle-6']",
+          "keywordValue" : "//img[contains(@alt, 'חבילת 6 מארזי')]",
           "keywordAction" : "click",
           "actionValue" : "",
           "mandatory" : true
@@ -57,15 +57,24 @@
         },
         {
           "stepId" : 6,
+          "stepName" : "'waitBeforePayment'",
+          "findKeywordBy" : "",
+          "keywordValue" : "",
+          "keywordAction" : "wait",
+          "actionValue" : "8",
+          "mandatory" : true
+        },
+        {
+          "stepId" : 7,
           "stepName" : "moveToPayment",
           "findKeywordBy" : "xpath",
-          "keywordValue" : "//span[contains(text(),'המשך לתשלום')]",
+          "keywordValue" : "//button[@title='המשך לתשלום']",
           "keywordAction" : "click",
           "actionValue" : "",
           "mandatory" : true
         },
         {
-          "stepId" : 7,
+          "stepId" : 8,
           "stepName" : "enterFirstName",
           "findKeywordBy" : "xpath",
           "keywordValue" : "//input[@name='firstname']",
@@ -74,7 +83,7 @@
           "mandatory" : true
         },
         {
-          "stepId" : 8,
+          "stepId" : 9,
           "stepName" : "enterLastName",
           "findKeywordBy" : "xpath",
           "keywordValue" : "//input[@name='lastname']",
@@ -88,6 +97,6 @@
   "settings" : {
     "reportLocation" : "C:\\Automation\\report\\",
     "highlightElement" : true,
-    "waitBetween": 3
+    "moveToElement" : false
   }
 }
