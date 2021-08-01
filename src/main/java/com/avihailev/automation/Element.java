@@ -55,6 +55,7 @@ public class Element extends Reporter {
             }
             if (step.getSettings().getWaitBetween() > 0){
                 try {
+                    logger.info("waiting before finding element for: " + step.getSettings().getWaitBetween() + " seconds");
                     Thread.sleep((long) step.getSettings().getWaitBetween() * 1000);
                 } catch (InterruptedException interruptedException){
                     logger.error("failed to wait between steps");

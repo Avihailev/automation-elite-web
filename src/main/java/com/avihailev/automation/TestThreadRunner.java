@@ -15,7 +15,6 @@ public class TestThreadRunner implements Runnable {
 
     @Override
     public void run() {
-        //ReportTest reportTest = new ReportTest(test.getTestName());
         Report report = new Report(settings.getReportLocation(), test.getTestName() + " - Automation Report");
         report.startTest(test.getTestName());
         Driver driver = new Driver(test.getTestBrowser());

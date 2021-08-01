@@ -4,9 +4,12 @@ import com.avihailev.automation.report.Reporter;
 import com.avihailev.automation.types.ActionType;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.ExecutionException;
 
 public class Action extends Reporter {
 
@@ -32,35 +35,27 @@ public class Action extends Reporter {
                     wait.until(ExpectedConditions.elementToBeClickable(element.getElement()));
                     try {
                         moveToElement();
-                        boolean success = false;
-                        int i = 0;
-                        while (!success && i < 9) {
-                            try {
-                                element.getElement().click();
-                                success = true;
-                            } catch (Exception e){
-                                i++;
-                                logger.error(i + " try to click button " + step.getStepName());
-                                Thread.sleep(2000);
-                            }
-                        }
-                        if (!success) {
-                            element.getElement().click();
-                        }
+                        if (!click())
+                            return fail("failed to click element: " + step.getStepName());
+                        return pass();
                     } catch (Exception exception){
                         logger.error("exception: " + exception.getMessage());
                         return fail("error in clicking " + step.getStepName());
                     }
-                    return pass();
                 }
                 case Set: {
-                    logger.info("setting text in field");
-                    moveToElement();
-                    for (int i = 0; i < step.getActionValue().length(); i++) {
-                        element.getElement().sendKeys(String.valueOf(step.getActionValue().charAt(i)));
-                        Thread.sleep(500);
+                    try {
+                        logger.info("setting text in field");
+                        moveToElement();
+                        for (int i = 0; i < step.getActionValue().length(); i++) {
+                            element.getElement().sendKeys(String.valueOf(step.getActionValue().charAt(i)));
+                            Thread.sleep(500);
+                        }
+                        return pass();
+                    } catch (Exception e){
+                        logger.error("failed to set text to field " + step.getStepName());
+                        return fail("failed to set text to field " + step.getStepName());
                     }
-                    return pass();
                 }
                 case CompareText: {
                     logger.info("comparing text between element and text provided");
@@ -93,21 +88,21 @@ public class Action extends Reporter {
                         moveToElement();
                         Actions a = new Actions(element.getDriver().getWebDriver());
                         a.contextClick(element.getElement()).perform();
+                        return pass();
                     } catch (Exception exception) {
                         logger.error("exception: " + exception.getMessage());
                         return fail("error in context clicking " + step.getStepName());
                     }
-                    return pass();
                 }
                 case Wait: {
                     try{
-                        int waitTime = Integer.getInteger(step.getActionValue());
+                        int waitTime = Integer.parseInt(step.getActionValue());
                         Thread.sleep((long) waitTime*1000);
-                        pass();
+                        return pass();
                     } catch (Exception e){
                         String message = "failed to wait for element: " + step.getStepName() + " , please check if entered a number in action value";
                         logger.error(message);
-                        fail(message);
+                        return fail(message);
                     }
                 }
                 default: {
@@ -154,5 +149,49 @@ public class Action extends Reporter {
                 logger.error(e.getMessage());
             }
         }
+    }
+
+    private void moveToElementFromClick(){
+        logger.info("moving to element");
+        try {
+            Actions actions = new Actions(element.getDriver().getWebDriver());
+            actions.moveToElement(element.getElement()).build().perform();
+            //Thread.sleep(1000);
+        } catch (Exception e) {
+            logger.error("failed to move to element with this error: ");
+            logger.error(e.getMessage());
+        }
+    }
+
+    private boolean click(){
+        try {
+            int i = 0;
+            while (i < 5) {
+                try {
+                    element.getElement().click();
+                    return true;
+                } catch (Exception e) {
+                    i++;
+                    logger.error(i + " try to click button " + step.getStepName());
+                    Thread.sleep(2000);
+                }
+            }
+            setElementInTheMiddle();
+            logger.info("trying to reclick element");
+            element.getElement().click();
+            return true;
+        } catch (Exception e){
+            logger.error("failed to click element with this error: ");
+            logger.error(e.getMessage());
+            return false;
+        }
+    }
+
+    private void setElementInTheMiddle(){
+        logger.info("setting element in the middle of the screen");
+        String scrollElementIntoMiddle = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
+                + "var elementTop = arguments[0].getBoundingClientRect().top;"
+                + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
+        ((JavascriptExecutor) element.getDriver().getWebDriver()).executeScript(scrollElementIntoMiddle, element.getElement());
     }
 }
