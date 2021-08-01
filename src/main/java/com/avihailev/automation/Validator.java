@@ -1,5 +1,6 @@
 package com.avihailev.automation;
 
+import com.avihailev.automation.types.ActionType;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -17,9 +18,11 @@ public class Validator {
             logger.error("step " + step.getStepName() + " has no id, therefore the step didn't run");
             return false;
         }
-        if (step.getFindKeywordBy() == null || step.getKeywordValue() == null){
-            logger.error("step " + step.getStepName() + " doesn't have a keyword or keyword value, therefore the step didn't run");
-            return false;
+        if (step.getKeywordAction() != ActionType.Wait) {
+            if (step.getFindKeywordBy() == null || step.getKeywordValue() == null) {
+                logger.error("step " + step.getStepName() + " doesn't have a keyword or keyword value, therefore the step didn't run");
+                return false;
+            }
         }
         if (step.getKeywordAction() == null){
             logger.error("step " + step.getStepName() + " doesn't have a action, therefore the step didn't run");

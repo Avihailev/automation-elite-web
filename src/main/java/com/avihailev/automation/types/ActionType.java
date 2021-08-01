@@ -8,5 +8,11 @@ public enum ActionType {
     @JsonProperty("set")
     Set,
     @JsonProperty("compare")
-    CompareText
+    CompareText,
+    @JsonProperty("double click")
+    DoubleClick,
+    @JsonProperty("wait")
+    Wait,
+    @JsonProperty("context click")
+    ContextClick
 }

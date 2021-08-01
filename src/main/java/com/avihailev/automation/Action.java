@@ -1,21 +1,21 @@
 package com.avihailev.automation;
 
-import com.avihailev.automation.common.CommonActions;
 import com.avihailev.automation.report.Reporter;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Actions extends Reporter {
+public class Action extends Reporter {
 
     private Element element;
     private TestStep step;
     private WebDriverWait wait;
 
-    private static final Logger logger = LogManager.getLogger(Actions.class.getName());
+    private static final Logger logger = LogManager.getLogger(Action.class.getName());
 
-    public Actions(Element element, TestStep step){
+    public Action(Element element, TestStep step){
         logger.info("deciding what action to take for element " + step.getStepName());
         this.element = element;
         this.step = step;
@@ -30,6 +30,7 @@ public class Actions extends Reporter {
                     logger.info("clicking element");
                     wait.until(ExpectedConditions.elementToBeClickable(element.getElement()));
                     try {
+                        moveToElement();
                         element.getElement().click();
                     } catch (Exception exception){
                         logger.error("exception: " + exception.getMessage());
@@ -39,17 +40,56 @@ public class Actions extends Reporter {
                 }
                 case Set: {
                     logger.info("setting text in field");
+                    moveToElement();
                     element.getElement().sendKeys(step.getActionValue());
                     return pass();
                 }
                 case CompareText: {
                     logger.info("comparing text between element and text provided");
+                    moveToElement();
                     if (element.getElement().getText().equals(step.getActionValue())){
                         logger.info("text is equal");
                         return pass();
                     } else {
                         logger.info("text is not equal");
                         return fail("element was found but element contains text: " +  element.getElement().getText() + " but text expected is: " + step.getActionValue());
+                    }
+                }
+                case DoubleClick: {
+                    logger.info("double clicking the element");
+                    wait.until(ExpectedConditions.elementToBeClickable(element.getElement()));
+                    try {
+                        moveToElement();
+                        Actions a = new Actions(element.getDriver().getWebDriver());
+                        a.doubleClick(element.getElement()).perform();
+                    } catch (Exception exception) {
+                        logger.error("exception: " + exception.getMessage());
+                        return fail("error in double clicking " + step.getStepName());
+                    }
+                    return pass();
+                }
+                case ContextClick: {
+                    logger.info("context clicking the element");
+                    wait.until(ExpectedConditions.elementToBeClickable(element.getElement()));
+                    try {
+                        moveToElement();
+                        Actions a = new Actions(element.getDriver().getWebDriver());
+                        a.contextClick(element.getElement()).perform();
+                    } catch (Exception exception) {
+                        logger.error("exception: " + exception.getMessage());
+                        return fail("error in context clicking " + step.getStepName());
+                    }
+                    return pass();
+                }
+                case Wait: {
+                    try{
+                        int waitTime = Integer.getInteger(step.getActionValue());
+                        Thread.sleep((long) waitTime*1000);
+                        pass();
+                    } catch (Exception e){
+                        String message = "failed to wait for element: " + step.getStepName() + " , please check if entered a number in action value";
+                        logger.error(message);
+                        fail(message);
                     }
                 }
                 default: {
@@ -82,5 +122,17 @@ public class Actions extends Reporter {
 
     public TestStep getStep() {
         return step;
+    }
+
+    private void moveToElement(){
+        logger.info("moving to element");
+        try {
+            Actions actions = new Actions(element.getDriver().getWebDriver());
+            actions.moveToElement(element.getElement()).perform();
+        } catch (Exception e){
+            logger.error("failed to move to element with this error: ");
+            logger.error(e.getMessage());
+        }
+
     }
 }

@@ -24,11 +24,11 @@ public class TestThreadRunner implements Runnable {
             step.setSettings(settings);
             Element element = new Element(driver,step);
             if (element.find()){
-                Actions actions = new Actions(element,step);
-                if (actions.action()) {
-                    report.report(actions);
+                Action action = new Action(element,step);
+                if (action.action()) {
+                    report.report(action);
                 } else {
-                    report.report(actions);
+                    report.report(action);
                     break;
                 }
             } else if (step.isMandatory()){

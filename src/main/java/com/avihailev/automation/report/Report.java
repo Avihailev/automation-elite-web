@@ -6,7 +6,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import com.avihailev.automation.Actions;
+import com.avihailev.automation.Action;
 import com.avihailev.automation.Element;
 import com.avihailev.automation.TestStep;
 
@@ -30,7 +30,7 @@ public class Report {
         this.report.attachReporter(sparkReporter);
     }
 
-    public void report(Actions action){
+    public void report(Action action){
         TestStep step = action.getStep();
         if (!action.isPassed()){
             ArrayList<String> headersList = new ArrayList<>(Arrays.asList("ELEMENT NAME", "ACTION TYPE", "ACTION VALUE", "DESCRIPTION"));
