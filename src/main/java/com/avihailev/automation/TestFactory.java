@@ -23,6 +23,7 @@ public class TestFactory {
                 executor.execute(testThreadRunner);
             }
         }
+        System.out.println("test ended 2");
         executor.shutdown();
         CommonActions.killDrivers();
     }

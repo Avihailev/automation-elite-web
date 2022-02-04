@@ -2,11 +2,16 @@ package com.avihailev.automation;
 
 import com.avihailev.automation.browsers.Driver;
 import com.avihailev.automation.report.Report;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class TestThreadRunner implements Runnable {
 
     private Test test;
     private Settings settings;
+    private static final Logger logger = LogManager.getLogger(TestThreadRunner.class.getName());
+
 
     public TestThreadRunner(Test test, Settings settings){
         this.test = test;
@@ -36,6 +41,12 @@ public class TestThreadRunner implements Runnable {
             }
         }
         report.endReport();
+        logger.info("test ended");
+        try {
+            driver.getWebDriver().close();
+        } catch (Exception exception){
+            logger.log(Level.ERROR, "failed to close webdriver");
+        }
     }
 
 }
